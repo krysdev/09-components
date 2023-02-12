@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 function Button({
   children,
   primary,
@@ -9,6 +11,12 @@ function Button({
   rounded,
 }) {
   return <button>{children}</button>;
+}
+
+Button.propTypes = {
+  checkVariationValue: (props) => { 
+    console.log(props)
+  }
 }
 
 export default Button;

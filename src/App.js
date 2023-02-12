@@ -4,16 +4,16 @@ function App() {
   return (
     <div>
       <div>
-        <Button>1</Button>
+        <Button success primary rounded outline>10000</Button>
       </div>
       <div>
-        <Button>2</Button>
+        <Button danger outline>20000</Button>
       </div>
       <div>
-        <Button>3</Button>
+        <Button warning>30000</Button>
       </div>
       <div>
-        <Button>4</Button>
+        <Button secondary outline>40000</Button>
       </div>
     </div>
   );
