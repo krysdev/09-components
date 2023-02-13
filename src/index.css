@@ -9,3 +9,7 @@ body {
   font-size: 2em;
 }
 
+/* space between icon and button name */
+button > svg{
+  margin-right: 5px;
+}

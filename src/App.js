@@ -1,22 +1,41 @@
 import Button from './Button';
+import { GoBell, GoDatabase, GoAlert, GoMail } from 'react-icons/go';
 
 function App() {
+  const handleEvent = () => {
+    console.log('!! works !!');
+  };
+
   return (
     <div>
       <div>
-        <Button success rounded outline>10000</Button>
+        <Button success rounded outline onClick={handleEvent}>
+          <GoBell />
+          10000
+        </Button>
       </div>
       <div>
-        <Button danger outline>200</Button>
+        <Button danger outline onMouseEnter={handleEvent}>
+          <GoDatabase />
+          2001
+        </Button>
       </div>
       <div>
-        <Button warning>30000000</Button>
+        <Button warning className={'mb-5'}>
+          <GoAlert />
+          30000000
+        </Button>
       </div>
       <div>
-        <Button secondary outline>40000</Button>
+        <Button secondary outline>
+          <GoMail />
+          40000
+        </Button>
       </div>
       <div>
-        <Button primary rounded>50000</Button>
+        <Button primary rounded>
+          50000
+        </Button>
       </div>
     </div>
   );
