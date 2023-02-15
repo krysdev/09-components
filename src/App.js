@@ -1,42 +1,30 @@
-import Button from './components/Button';
-import { GoBell, GoDatabase, GoAlert, GoMail } from 'react-icons/go';
+import Accordion from './components/Accordion';
 
 function App() {
-  const handleEvent = () => {
-    console.log('!! works !!');
-  };
+  const items = [
+    {
+      id: 'l2kj5',
+      label: 'Can I use React on a project?',
+      content:
+        'You can use React on any project you want. You can use React on any project you want. You can use React on any project you want. You can use React on any project you want.',
+    },
+    {
+      id: 'lk2j35lkj',
+      label: 'Can I use Javascript on a project?',
+      content:
+        'You can use React on any project you want. You can use React on any project you want. You can use React on any project you want. You can use React on any project you want.',
+    },
+    {
+      id: 'l1kj2i0g',
+      label: 'Can I use CSS on a project?',
+      content:
+        'You can use React on any project you want. You can use React on any project you want. You can use React on any project you want. You can use React on any project you want.',
+    },
+  ];
 
   return (
     <div>
-      <div>
-        <Button success rounded outline onClick={handleEvent}>
-          <GoBell />
-          10000
-        </Button>
-      </div>
-      <div>
-        <Button danger outline onMouseEnter={handleEvent}>
-          <GoDatabase />
-          2001
-        </Button>
-      </div>
-      <div>
-        <Button warning className={'mb-5'}>
-          <GoAlert />
-          30000000
-        </Button>
-      </div>
-      <div>
-        <Button secondary outline>
-          <GoMail />
-          40000
-        </Button>
-      </div>
-      <div>
-        <Button primary rounded>
-          50000
-        </Button>
-      </div>
+      <Accordion items={items} />
     </div>
   );
 }
