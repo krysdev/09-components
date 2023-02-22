@@ -10,11 +10,13 @@ const options = [
 function App() {
   const [selection, setSelection] = useState(null);
 
-  const handleSelection = (optSelected) => {
+  const handleSelect = (optSelected) => {
     setSelection(optSelected);
   };
 
-  return <Dropdown options={options} selection={selection} />;
+  return (
+    <Dropdown options={options} selection={selection} onSelect={handleSelect} />
+  );
 }
 
 export default App;
