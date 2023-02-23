@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function Dropdown({ options, selection, onSelect }) {
+function Dropdown({ options, value, onChange }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleOptionClick = (value) => {
@@ -8,7 +8,7 @@ function Dropdown({ options, selection, onSelect }) {
     setIsOpen(false);
     // what option clicked (value is an object)
     console.log(value);
-    onSelect(value);
+    onChange(value);
   };
 
   const renderedOptions = options.map((option, index) => {
@@ -19,10 +19,14 @@ function Dropdown({ options, selection, onSelect }) {
     );
   });
 
-  let content = 'Select...';
-  if (selection) {
-    content = selection.label;
-  }
+  // let content = 'Select...';
+  // if (value) {
+  //   content = value.label;
+  // }
+
+  // if 'value' is null, the '?' will cause to the expresion to return 'undiefined'
+  // so: undiefined || 'string' --> string   ('OR' returns the first truthy value [or the last falsy value])
+  let content = value?.label || 'Select...';
 
   return (
     <div>
