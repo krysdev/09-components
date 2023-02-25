@@ -1,9 +1,16 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { GoChevronDown } from 'react-icons/go';
 import PillReusableComponent from './PillReusableComponent';
 
 function Dropdown({ options, value, onChange }) {
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    const handler = (event) => { 
+      console.log(event.target);
+    };
+    document.addEventListener('click', handler);
+  }, []);
 
   const handleOptionClick = (value) => {
     // close dropdown
@@ -13,7 +20,7 @@ function Dropdown({ options, value, onChange }) {
     onChange(value);
   };
 
-  const renderedOptions = options.map((option, index) => {
+  const renderedOptionsList = options.map((option, index) => {
     return (
       <div
         className="hover:bg-sky-100 rounded cursor-pointer p-1"
@@ -36,6 +43,7 @@ function Dropdown({ options, value, onChange }) {
 
   return (
     <div className="w-48 relative">
+
       <PillReusableComponent
         className="flex justify-between items-center cursor-pointer"
         onClick={() => setIsOpen(!isOpen)}
@@ -43,9 +51,12 @@ function Dropdown({ options, value, onChange }) {
         {content}
         <GoChevronDown />
       </PillReusableComponent>
+
       {isOpen &&(
-        <PillReusableComponent className="absolute top-full">
-          {renderedOptions}
+        <PillReusableComponent
+          className="absolute top-full"
+        >
+          {renderedOptionsList}
         </PillReusableComponent>
       )}
     </div>
