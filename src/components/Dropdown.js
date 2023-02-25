@@ -9,7 +9,17 @@ function Dropdown({ options, value, onChange }) {
     const handler = (event) => { 
       console.log(event.target);
     };
-    document.addEventListener('click', handler);
+    // 'true' as a third argument, becasue we want to watch for clicks during the capture phase (capture, target, bubble )
+    document.addEventListener('click', handler, true);
+
+    // when the second argument of useEffect is an empty array we can't forget about the clean up function (to remove the event listener)
+    // the RETURNED function will be called during the second render (on hold during the first one)
+    const cleanUp = () => { 
+      document.removeEventListener('click', handler)
+    };
+    
+    return cleanUp
+
   }, []);
 
   const handleOptionClick = (value) => {
