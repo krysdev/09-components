@@ -1,21 +1,36 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { GoChevronDown } from 'react-icons/go';
 import PillReusableComponent from './PillReusableComponent';
 
 function Dropdown({ options, value, onChange }) {
   const [isOpen, setIsOpen] = useState(false);
 
+  // associate divEl (the result of calling useRef) with the DOM element adding the prop 'ref' to it
+  const divEl = useRef();
+
   useEffect(() => {
     const handler = (event) => { 
       console.log(event.target);
+      console.log(divEl.current);
+
+      // GOOD PRACTICE: if the DOM element (divEL) does not exist (is not visible) then don't process the next IF
+      if (!divEl.current) {
+        return;
+      }
+
+      // if click is not inside of the DOM element:
+      if (!divEl.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+
     };
     // 'true' as a third argument, becasue we want to watch for clicks during the capture phase (capture, target, bubble )
     document.addEventListener('click', handler, true);
 
-    // when the second argument of useEffect is an empty array we can't forget about the clean up function (to remove the event listener)
-    // the RETURNED function will be called during the second render (on hold during the first one)
+    // when the second argument of useEffect is an empty array (or elements) we can't forget about the clean up function (to remove the event listener)
+    // the RETURNED cleanUp function will be called during the second render (on hold during the first one)
     const cleanUp = () => { 
-      document.removeEventListener('click', handler)
+      document.removeEventListener('click', handler);
     };
     
     return cleanUp
@@ -25,8 +40,8 @@ function Dropdown({ options, value, onChange }) {
   const handleOptionClick = (value) => {
     // close dropdown
     setIsOpen(false);
-    // what option clicked (value is an object)
-    console.log(value);
+    // what option was clicked (value is an object)
+    // console.log(value);
     onChange(value);
   };
 
@@ -52,7 +67,7 @@ function Dropdown({ options, value, onChange }) {
   let content = value?.label || 'Select...';
 
   return (
-    <div className="w-48 relative">
+    <div ref={divEl} className="w-48 relative">
 
       <PillReusableComponent
         className="flex justify-between items-center cursor-pointer"
