@@ -13,15 +13,15 @@ function TablePage() {
   const config = [
     {
       label: 'Name',
-      render: (dataObjct) => dataObjct.name,
+      render: (dataObj) => dataObj.name,
     },
     {
       label: 'Color',
-      render: (dataObjct) => <div className={`p-3 m-2 ${dataObjct.colour}`} />,
+      render: (dataObj) => <div className={`p-3 m-2 ${dataObj.colour}`} />,
     },
     {
       label: 'Score',
-      render: (dataObjct) => dataObjct.score,
+      render: (dataObj) => dataObj.score,
     },
   ];
 

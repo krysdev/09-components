@@ -5,7 +5,7 @@ function Table({ data, config }) {
     return <th key={cfg.label}>{cfg.label}</th>;
   });
 
-  // 'dataObjct' is passed from TablePage.js to 'dataObject' through the 'config' prop
+  // 'dataObject' argument is used in TablePage.js as 'dataObj' (through the 'config' prop)
   const renderedRows = data.map((dataObject) => {
     return (
       <tr className="border-b" key={dataObject.name}>
