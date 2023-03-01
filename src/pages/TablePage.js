@@ -8,9 +8,26 @@ function TablePage() {
     { name: 'Lime', colour: 'bg-green-500', score: 4 },
   ];
 
+  //  each object in the 'config' array is a column in the table
+  // { label-> column header, render-> cell content }
+  const config = [
+    {
+      label: 'Name',
+      render: (dataObjct) => dataObjct.name,
+    },
+    {
+      label: 'Color',
+      render: (dataObjct) => <div className={`p-3 m-2 ${dataObjct.colour}`} />,
+    },
+    {
+      label: 'Score',
+      render: (dataObjct) => dataObjct.score,
+    },
+  ];
+
   return (
     <div>
-      <Table data={data} />
+      <Table data={data} config={config} />
     </div>
   );
 }

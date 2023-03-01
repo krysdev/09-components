@@ -1,12 +1,21 @@
-function Table({ data }) {
-  const renderedRows = data.map((el) => {
+function Table({ data, config }) {
+  //
+
+  const renderedHeaders = config.map((cfg) => {
+    return <th key={cfg.label}>{cfg.label}</th>;
+  });
+
+  // 'dataObjct' is passed from TablePage.js to 'dataObject' through the 'config' prop
+  const renderedRows = data.map((dataObject) => {
     return (
-      <tr className="border-b" key={el.name}>
-        <td className="p-3">{el.name}</td>
-        <td className="p-3">
-          <div className={`p-3 m-2 ${el.colour}`}></div>
-        </td>
-        <td className="p-3">{el.score}</td>
+      <tr className="border-b" key={dataObject.name}>
+        {config.map((configObject) => {
+          return (
+            <td key={configObject.label} className="p-3">
+              {configObject.render(dataObject)}
+            </td>
+          );
+        })}
       </tr>
     );
   });
@@ -14,11 +23,7 @@ function Table({ data }) {
   return (
     <table className="table-auto border-spacing-2">
       <thead>
-        <tr className="border-b-2">
-          <th>Friut</th>
-          <th>Colour</th>
-          <th>Score</th>
-        </tr>
+        <tr className="border-b-2">{renderedHeaders}</tr>
       </thead>
       <tbody>{renderedRows}</tbody>
     </table>
