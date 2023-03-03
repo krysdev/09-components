@@ -20,7 +20,6 @@ function Table({ data, config }) {
     );
   });
 
-  
   return (
     <table className="table-auto border-spacing-2">
       <thead>
