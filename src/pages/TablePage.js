@@ -1,4 +1,5 @@
 import Table from '../components/Table';
+import SortableTable from './SortableTable';
 
 function TablePage() {
   const data = [
@@ -22,6 +23,7 @@ function TablePage() {
     {
       label: 'Score',
       render: (dataObj) => dataObj.score,
+      header: ()=> <th className='bg-red-500'>Score</th>
     },
   ];
 
