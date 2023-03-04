@@ -1,5 +1,5 @@
-import Table from '../components/Table';
-import SortableTable from './SortableTable';
+// import Table from '../components/Table';
+import SortableTable from '../components/SortableTable';
 
 function TablePage() {
   const data = [
@@ -14,7 +14,8 @@ function TablePage() {
   const config = [
     {
       label: 'Name',
-      render: (dataObj) => dataObj.name,
+      render: (dataObj) => <i>{dataObj.name}</i>,
+      sortByValue: (dataObj) => dataObj.name,
     },
     {
       label: 'Color',
@@ -23,13 +24,13 @@ function TablePage() {
     {
       label: 'Score',
       render: (dataObj) => dataObj.score,
-      header: ()=> <th className='bg-red-500'>Score</th>
+      sortByValue: (dataObj) => dataObj.score,
     },
   ];
 
   return (
     <div>
-      <Table data={data} config={config} />
+      <SortableTable data={data} config={config} />
     </div>
   );
 }
