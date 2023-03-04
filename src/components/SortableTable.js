@@ -7,9 +7,43 @@
 
 import { useState } from 'react';
 import Table from './Table';
+import { GoArrowSmallDown, GoArrowSmallUp } from 'react-icons/go';
 
-const getIcons = (params) => {
-  return;
+const getIcons = (columnLabel, sortByColumn, sortingOrder) => {
+  // no sorting applied
+  if (columnLabel !== sortByColumn) {
+    return (
+      <div>
+        <GoArrowSmallUp />
+        <GoArrowSmallDown />
+      </div>
+    );
+  }
+  // no sorting applied
+  if (sortingOrder === null) {
+    return (
+      <div>
+        <GoArrowSmallUp />
+        <GoArrowSmallDown />
+      </div>
+    );
+  }
+  // ascending
+  else if (sortingOrder === 'asc') {
+    return (
+      <div>
+        <GoArrowSmallUp />
+      </div>
+    );
+  }
+  // descending
+  else if (sortingOrder === 'desc') {
+    return (
+      <div>
+        <GoArrowSmallDown />
+      </div>
+    );
+  }
 };
 
 function SortableTable(props) {
@@ -20,6 +54,15 @@ function SortableTable(props) {
 
   const handleClick = (label) => {
     // by clicking we cycle through: no sort > asc > desc > no sort > ...
+
+    // reseting the sort order when clicked on another header
+    if (sortBy && label !== sortBy) {
+      setSortOrder('asc');
+      setSortBy(label);
+      return;
+    }
+
+    // otherwise...
     if (sortOrder === null) {
       setSortOrder('asc');
       setSortBy(label);
@@ -42,12 +85,15 @@ function SortableTable(props) {
       ...tableColumn,
       header: () => (
         <th
+          className="cursor-pointer hover:bg-gray-900"
           onClick={() => {
             handleClick(tableColumn.label);
           }}
         >
-          {getIcons(tableColumn.label, sortBy, sortOrder)}
-          {tableColumn.label}
+          <div className="flex items-center">
+            {getIcons(tableColumn.label, sortBy, sortOrder)}
+            {tableColumn.label}
+          </div>
         </th>
       ),
     };

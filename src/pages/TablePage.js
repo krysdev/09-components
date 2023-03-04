@@ -1,4 +1,4 @@
-// import Table from '../components/Table';
+import Table from '../components/Table';
 import SortableTable from '../components/SortableTable';
 
 function TablePage() {
@@ -31,6 +31,10 @@ function TablePage() {
   return (
     <div>
       <SortableTable data={data} config={config} />
+      <br />
+      <br />
+      <br />
+      <Table data={data} config={config} />
     </div>
   );
 }
