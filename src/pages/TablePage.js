@@ -2,6 +2,7 @@ import Table from '../components/Table';
 import SortableTable from '../components/SortableTable';
 
 function TablePage() {
+  
   const data = [
     { name: 'Orange', colour: 'bg-orange-500', score: 5 },
     { name: 'Apple', colour: 'bg-red-500', score: 3 },
