@@ -3,22 +3,34 @@ import Button from '../components/Button';
 import PillReusableComponent from '../components/PillReusableComponent';
 
 const reducer = (state, action) => {
-  //
+  if (action.type === 'increment') {
+    return {
+      ...state,
+      count: state.count + 1,
+    };
+  }
+
+  if (action.type === 'on-change') {
+    return {
+      ...state,
+      valueToAdd: action.payload,
+    };
+  }
+  // fallback (if none of the IFs executed)
+  return state;
 };
 
 function CounterPage({ initialCount }) {
-  // const [count, setCount] = useState(initialCount);
-  // const [valueToAdd, setValueToAdd] = useState(0);
   const [state, dispatch] = useReducer(reducer, {
     count: initialCount,
     valueToAdd: 0,
   });
 
   const handleClickPlus = () => {
-    // setCount(count + 1);
+    dispatch({ type: 'increment' });
   };
   const handleClickMinus = () => {
-    // setCount(count - 1);
+    dispatch({ type: 'decrement' });
   };
 
   const handleChange = (e) => {
@@ -26,13 +38,15 @@ function CounterPage({ initialCount }) {
     // But when parseInt gets an empty string (''), so when you delete everything from the field, then it gives back 'NaN'
     // therefore NaN || 0 -> gives 0
     const value = parseInt(e.target.value) || 0;
-    // setValueToAdd(value);
+
+    dispatch({ type: 'on-change', payload: value });
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
     // setCount(count + valueToAdd);
     // setValueToAdd(0);
+    dispatch({type: 'on-submit'});
   };
 
   return (
