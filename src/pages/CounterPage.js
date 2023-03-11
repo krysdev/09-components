@@ -4,8 +4,8 @@ import PillReusableComponent from '../components/PillReusableComponent';
 
 const INCREMENT_COUNT = 'increment';
 const DECREMENT_COUNT = 'decrement';
-const ON_CHANGE = 'on-change'; // SET_VALUE_TO_ADD
-const ON_SUBMIT = 'on-submit'; // ADD_VALUE_TO_COUNT
+const ON_CHANGE = 'on-change';
+const ON_SUBMIT = 'on-submit';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -14,30 +14,41 @@ const reducer = (state, action) => {
         ...state,
         count: state.count + 1,
       };
+    case DECREMENT_COUNT:
+      return {
+        ...state,
+        count: state.count - 1,
+      };
     case ON_CHANGE:
       return {
         ...state,
         valueToAdd: action.payload,
+      };
+    case ON_SUBMIT:
+      return {
+        // setCount(count + valueToAdd) [1]
+        // setValueToAdd(0) [2]
+        ...state,
+        count: state.count + state.valueToAdd, // [1]
+        valueToAdd: 0, // [2]
       };
 
     default:
       // You can throw an error to diagnose what case is missing etc.
       // throw new Error('unexpected action type: ' + action.type);
 
-      // or ignore why it reached 'default' with this reducer
+      // or ignore why the reducer reached 'default'
       return state;
   }
 };
 
 function CounterPage({ initialCount }) {
   //
-  //
   const [state, dispatch] = useReducer(reducer, {
     count: initialCount,
     valueToAdd: 0,
   });
-  //
-  //
+
   const handleClickPlus = () => {
     dispatch({ type: INCREMENT_COUNT });
   };
@@ -56,8 +67,6 @@ function CounterPage({ initialCount }) {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    // setCount(count + valueToAdd);
-    // setValueToAdd(0);
     dispatch({ type: ON_SUBMIT });
   };
 
