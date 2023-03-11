@@ -2,35 +2,47 @@ import { useReducer } from 'react';
 import Button from '../components/Button';
 import PillReusableComponent from '../components/PillReusableComponent';
 
-const reducer = (state, action) => {
-  if (action.type === 'increment') {
-    return {
-      ...state,
-      count: state.count + 1,
-    };
-  }
+const INCREMENT_COUNT = 'increment';
+const DECREMENT_COUNT = 'decrement';
+const ON_CHANGE = 'on-change'; // SET_VALUE_TO_ADD
+const ON_SUBMIT = 'on-submit'; // ADD_VALUE_TO_COUNT
 
-  if (action.type === 'on-change') {
-    return {
-      ...state,
-      valueToAdd: action.payload,
-    };
+const reducer = (state, action) => {
+  switch (action.type) {
+    case INCREMENT_COUNT:
+      return {
+        ...state,
+        count: state.count + 1,
+      };
+    case ON_CHANGE:
+      return {
+        ...state,
+        valueToAdd: action.payload,
+      };
+
+    default:
+      // You can throw an error to diagnose what case is missing etc.
+      // throw new Error('unexpected action type: ' + action.type);
+
+      // or ignore why it reached 'default' with this reducer
+      return state;
   }
-  // fallback (if none of the IFs executed)
-  return state;
 };
 
 function CounterPage({ initialCount }) {
+  //
+  //
   const [state, dispatch] = useReducer(reducer, {
     count: initialCount,
     valueToAdd: 0,
   });
-
+  //
+  //
   const handleClickPlus = () => {
-    dispatch({ type: 'increment' });
+    dispatch({ type: INCREMENT_COUNT });
   };
   const handleClickMinus = () => {
-    dispatch({ type: 'decrement' });
+    dispatch({ type: DECREMENT_COUNT });
   };
 
   const handleChange = (e) => {
@@ -39,14 +51,14 @@ function CounterPage({ initialCount }) {
     // therefore NaN || 0 -> gives 0
     const value = parseInt(e.target.value) || 0;
 
-    dispatch({ type: 'on-change', payload: value });
+    dispatch({ type: ON_CHANGE, payload: value });
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
     // setCount(count + valueToAdd);
     // setValueToAdd(0);
-    dispatch({type: 'on-submit'});
+    dispatch({ type: ON_SUBMIT });
   };
 
   return (
