@@ -1,7 +1,6 @@
 import { useReducer } from 'react';
 import Button from '../components/Button';
 import PillReusableComponent from '../components/PillReusableComponent';
-import produce from 'immer';
 
 const INCREMENT_COUNT = 'increment';
 const DECREMENT_COUNT = 'decrement';
@@ -11,33 +10,41 @@ const ON_SUBMIT = 'on-submit';
 const reducer = (state, action) => {
   switch (action.type) {
     case INCREMENT_COUNT:
-      state.count = state.count + 1;
-      return;
+      return {
+        ...state,
+        count: state.count + 1,
+      };
     case DECREMENT_COUNT:
-      state.count = state.count - 1;
-      return;
+      return {
+        ...state,
+        count: state.count - 1,
+      };
     case ON_CHANGE:
-      state.valueToAdd = action.payload;
-      return;
+      return {
+        ...state,
+        valueToAdd: action.payload,
+      };
     case ON_SUBMIT:
-      // setCount(count + valueToAdd) [1]
-      // setValueToAdd(0) [2]
-      state.count = state.count + state.valueToAdd; // [1]
-      state.valueToAdd = 0; // [2]
-      return;
+      return {
+        // setCount(count + valueToAdd) [1]
+        // setValueToAdd(0) [2]
+        ...state,
+        count: state.count + state.valueToAdd, // [1]
+        valueToAdd: 0, // [2]
+      };
 
     default:
       // You can throw an error to diagnose what case is missing etc.
       // throw new Error('unexpected action type: ' + action.type);
 
       // or ignore the fact the reducer reached 'default'
-      return;
+      return state;
   }
 };
 
 function CounterPage({ initialCount }) {
   //
-  const [state, dispatch] = useReducer(produce(reducer), {
+  const [state, dispatch] = useReducer(reducer, {
     count: initialCount,
     valueToAdd: 0,
   });

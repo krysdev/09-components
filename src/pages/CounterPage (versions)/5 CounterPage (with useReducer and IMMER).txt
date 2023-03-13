@@ -1,0 +1,43 @@
+
+the file is in 'pages' folder
+
+
+
+1) without IMMER
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case INCREMENT_COUNT:
+      return {
+        ...state,
+        count: state.count + 1
+      };
+    default:
+      return state;
+  }
+};
+
+
+- STATE can't be directly modified
+- a value to use for STATE must be returned (an object)
+
+
+
+
+2) useReducer + IMMER
+
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case INCREMENT_COUNT:
+      state.count: state.count + 1
+      return;
+    default:
+      return state;
+  }
+};
+
+
+- STATE can be mutated
+- no value returned for STATE required
+- but still need to close each CASE with 'return' (otherwise SWITCH gets to default)
