@@ -1,5 +1,5 @@
 
-the file is in 'pages' folder
+the file is in 'pages' folder: pages/CounterPage.js
 
 
 
