@@ -43,11 +43,13 @@ const reducer = (state, action) => {
 };
 
 function CounterPage({ initialCount }) {
-  //
+
+
   const [state, dispatch] = useReducer(reducer, {
     count: initialCount,
     valueToAdd: 0,
   });
+
 
   const handleClickPlus = () => {
     dispatch({ type: INCREMENT_COUNT });
