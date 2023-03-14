@@ -12,7 +12,7 @@ function Modal({ onClose, actionBar, children }) {
     };
   }, []);
 
-  // (first argument is the JSX, second argument is the refernece to the placeholder)
+  // (first argument is the JSX - <div>JSX</div>, second argument is the refernece to the placeholder)
   return ReactDOM.createPortal(
     <div>
 
