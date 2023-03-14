@@ -12,7 +12,7 @@ function Link({ to, children, className, activeLinkClassName }) {
   );
 
   const handleClick = (e) => {
-    //to add a functionality of CTRL+click (open in new tab)
+    //to add a functionality of CTRL+click (open in new tab) 
     if (e.metaKey || e.ctrlKey) {
       return;
     }
